@@ -5,7 +5,7 @@ const app = express();
 const cors = require('cors');
 app.use(cors());
 app.use(express.json());
-const port=process.env.PORT
+const port=process.env.PORT || 8080
 const {getDegURL,postDegURL,getDegFavURL,deleteDegFavURL,updateDegFavURL} = require('./controller/user.controller')
 const mongoose = require('mongoose');
 // mongoose
