@@ -8,8 +8,27 @@ app.use(express.json());
 const port=process.env.PORT
 const {getDegURL,postDegURL,getDegFavURL,deleteDegFavURL,updateDegFavURL} = require('./controller/user.controller')
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/degmond',
-{useNewUrlParser: true, useUnifiedTopology: true});
+// mongoose
+//   .connect("mongodb://localhost:27017/movies", {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true,
+//   })
+//   .then(() => {
+//     console.log("Connected to the database!");
+//   })
+//   .catch((err) => {
+//     console.log("Cannot connect to the database!", err);
+//     process.exit();
+//   });
+mongoose.connect(
+'mongodb://samah:1234@degmond-shard-00-00.kchnw.mongodb.net:27017,degmond-shard-00-01.kchnw.mongodb.net:27017,degmond-shard-00-02.kchnw.mongodb.net:27017/degmond?ssl=true&replicaSet=atlas-105kwd-shard-0&authSource=admin&retryWrites=true&w=majority',
+  // 'mongodb://localhost:27017/degmond',  
+{useNewUrlParser: true, useUnifiedTopology: true}).then(()=>{
+    console.log('atlas is connected');
+}).catch((err)=>{
+    console.log('error connected',err);
+    process.exit();
+});
 
 app.get('/getDegURL',getDegURL)
 app.post('/postDegURL',postDegURL)
